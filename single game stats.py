@@ -10,10 +10,16 @@ playerId = {}
 a = []
 b = []
 
+#for loop used for easy change from single to multiple game
+#simply change the upper bound to increase game amounts
+#however this code will not work with multiple games from the same team
 for i in range(2019020001, 2019020002, 1):
     url = 'https://statsapi.web.nhl.com/api/v1/game/{}/feed/live'.format(i)
     r = requests.get(url)
     gameData = r.json()
+    
+    #visit the website to get an intuitive understanding of what this code
+    #is trying to access and how the data is stored
     
     for j in ['home', 'away']:
         playerDict = gameData.get('liveData').get('boxscore').get('teams').get(j).get('skaters')
@@ -28,7 +34,8 @@ for i in range(2019020001, 2019020002, 1):
             b.append(y)
             count +=1
 
-with open('pdict.csv', mode='w') as csv_file:
+#open and write to a csv file, which is easily imported to SQL server
+with open('file.csv', mode='w') as csv_file:
     fieldnames = ['id', 'fullName', 'goals']
     w = csv.DictWriter(csv_file, fieldnames=fieldnames)
     w.writeheader()
