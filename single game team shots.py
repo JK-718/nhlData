@@ -11,6 +11,8 @@ response = requests.get(url)
 data = response.text
 parsed = json.loads(data)
 
+#Enter team name for shots in a given range
+teamVar = str(input())
 shotx, shoty = [], []
 
 #set the range of games to scrape shot data from
@@ -28,7 +30,7 @@ for i in range(2019020001, 2019020220, 1):
             name = (i['team']['name'])
             #Caps used as an example, to use different team simply enter entire name in line 30 here
             #No other changes necessary
-            if name == 'Washington Capitals' and i['result']['event'] == 'Shot':
+            if name == teamVar and i['result']['event'] == 'Shot':
                 #Bring all shots to one side of the rink
                 x = abs(i['coordinates']['x'])
                 y = i['coordinates']['y']
