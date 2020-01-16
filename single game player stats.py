@@ -1,5 +1,4 @@
 import requests
-import csv
 
 url = "https://statsapi.web.nhl.com/api/v1/game/2017020003/feed/live"
 response = requests.get(url)
